@@ -2,8 +2,8 @@ import pymysql
 
 ###MySQL 연동###
 conn=pymysql.connect(
-    user="yeji",
-    passwd="1234",
+    user="root",
+    passwd="",
     host="localhost",
     db="cp1"
 )
@@ -12,18 +12,18 @@ conn=pymysql.connect(
 cur=conn.cursor()
 
 cur.execute("""CREATE TABLE news_category (
-    code int NOT NULL,
+    code INT NOT NULL,
     name VARCHAR(9),
 
     PRIMARY KEY (code)
 );""")
 
 cur.execute("""CREATE TABLE news (
-    id int NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     url VARCHAR(200),
     image VARCHAR(200),
     title VARCHAR(50),
-    lead VARCHAR(150),
+    leadline VARCHAR(150),
     category INT,
     reporter VARCHAR(10),
     date VARCHAR(10),
@@ -34,21 +34,21 @@ cur.execute("""CREATE TABLE news (
 );""")
 
 cur.execute("""CREATE TABLE policy_category (
-    code int NOT NULL,
+    code INT NOT NULL,
     name VARCHAR(7),
 
     PRIMARY KEY (code)
 );""")
 
 cur.execute("""CREATE TABLE policy_area (
-    code int NOT NULL,
+    code INT NOT NULL,
     name VARCHAR(2),
 
     PRIMARY KEY (code)
 );""")
 
 cur.execute("""CREATE TABLE policy (
-    id int NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(50),
     url VARCHAR(200),
     year INT,
@@ -61,14 +61,14 @@ cur.execute("""CREATE TABLE policy (
 );""")
 
 cur.execute("""CREATE TABLE store_service (
-    code int NOT NULL,
+    code INT NOT NULL,
     name VARCHAR(11),
 
     PRIMARY KEY (code)
 );""")
 
 cur.execute("""CREATE TABLE store (
-    id int NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     service INT,
     area VARCHAR(10),
     open INT,
@@ -89,7 +89,7 @@ cur.execute("""CREATE TABLE sales_service (
 );""")
 
 cur.execute("""CREATE TABLE sales (
-    id int NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     year INT,
     quarter INT,
     service INT,
