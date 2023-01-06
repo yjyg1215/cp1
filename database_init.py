@@ -23,7 +23,7 @@ cur.execute("""CREATE TABLE news (
     url VARCHAR(200),
     image VARCHAR(200),
     title VARCHAR(50),
-    leadline VARCHAR(150),
+    leadline VARCHAR(120),
     category INT,
     reporter VARCHAR(10),
     date VARCHAR(10),
