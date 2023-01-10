@@ -72,7 +72,6 @@ cur.execute("""CREATE TABLE store (
     service INT,
     area VARCHAR(10),
     open INT,
-    state INT,
     close INT,
     x FLOAT,
     y FLOAT,

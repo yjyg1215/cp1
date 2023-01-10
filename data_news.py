@@ -50,6 +50,4 @@ cur=conn.cursor()
 for i in range(len(url_list)):
     get_news(url_list[i],i)
 
-###
-
 conn.close()
