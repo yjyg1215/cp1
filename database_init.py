@@ -71,10 +71,10 @@ cur.execute("""CREATE TABLE store (
     id INT NOT NULL AUTO_INCREMENT,
     service INT,
     area VARCHAR(10),
-    open INT,
-    close INT,
-    x FLOAT,
-    y FLOAT,
+    open_y INT,
+    open_m INT,
+    close_y INT,
+    close_m INT,
 
     PRIMARY KEY (id),
     FOREIGN KEY (service) REFERENCES store_service(code)

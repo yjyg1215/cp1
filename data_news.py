@@ -1,9 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import pymysql
+from datetime import datetime
 
 #뉴스 데이터 수집 함수
 def get_news(url,category):
+    now=datetime.now()
+
     response=requests.get(url)
 
     soup=BeautifulSoup(response.text,'html')
@@ -13,6 +16,12 @@ def get_news(url,category):
         a=news.find_all('a')
         em=news.find_all('em')
 
+        date=em[2].text.split()[0]
+        if int(date[:4])==now.year and int(date[5:7])==now.month and int(date[8:])==now.day:
+            pass
+        else:
+            continue
+        time=em[2].text.split()[1]
         link=a[0].attrs['href']
         try:
             image=a[0].find('img').attrs['src']
@@ -23,10 +32,9 @@ def get_news(url,category):
             title=a[0].text
             leadline=a[1].text[:120]
         reporter=em[1].text
-        date=em[2].text.split()[0]
-        time=em[2].text.split()[1]
 
-        cur.execute("INSERT IGNORE INTO news(url,image,title,leadline,category,reporter,date,time) VALUES (%s,%s,%s,%s,%s,%s,%s,%s);",(link,image,title,leadline,category,reporter,date,time))
+        cur.execute("INSERT IGNORE INTO news(url,image,title,leadline,category,reporter,date,time) VALUES (%s,%s,%s,%s,%s,%s,%s,%s);",
+        (link,image,title,leadline,category,reporter,date,time))
         conn.commit()
 
 #뉴스 카테고리별 요청 URL
@@ -45,6 +53,10 @@ conn=pymysql.connect(
 )
 
 cur=conn.cursor()
+
+###이전 데이터 삭제###
+cur.execute("TRUNCATE news;")
+conn.commit()
 
 ###데이터 수집###
 for i in range(len(url_list)):

@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>외식 산업 창업 Helper</title>
+        <style>
+            h1{text-align: center;}
+            hr.title{
+                width:50%;
+                background-color:rgb(57,111,211);
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>오늘의 뉴스</h1>
+        <hr size="7" class="title">
+        <ul>
+            {% for idx in news.index %}
+            <li>
+                <a href={{ news.iloc[idx,0] }}>
+                    <img src={{ news.iloc[idx,1] }} alt>
+                </a>
+                <div>
+                    <h4>
+                        <a href={{ news.iloc[idx,0] }}>{{ news.iloc[idx,2] }}</a>
+                    </h4>
+                    <p>
+                        <a href={{ news.iloc[idx,0] }}>
+                            {{ news.iloc[idx,3] }}
+                        </a>
+                    </p>
+                    <span>
+                        <em>{{ news.iloc[idx,4] }} | </em>
+                        <em>{{ news.iloc[idx,5] }} | </em>
+                        <em>{{ news.iloc[idx,6] }} {{ news.iloc[idx,7] }}</em>
+                    </span>
+                </div>
+                <hr>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

@@ -9,28 +9,25 @@ def get_store(df,service):
             continue
         else:
             area=row[1]['소재지전체주소'][:2]
-        try:
-            open=int(row[1]['인허가일자'])
-        except:
-            open=0
+        if na['인허가일자']:
+            open_y=0
+            open_m=0
+        else:
+            open_y=row[1]['인허가일자']//10000
+            open_m=row[1]['인허가일자']//100-(row[1]['인허가일자']//10000)*100  
         if row[1]['영업상태구분코드']==3:
-            try:
-                close=int(row[1]['폐업일자'])
-            except:
-                close=0
+            if na['폐업일자']:
+                close_y=0
+                close_m=0
+            else:
+                close_y=row[1]['폐업일자']//10000
+                close_m=row[1]['폐업일자']//100-(row[1]['폐업일자']//10000)*100
         else:
-            close=0
-        if na['좌표정보(x)']:
-            x=0
-        else:
-            x=row[1]['좌표정보(x)']
-        if na['좌표정보(y)']:
-            y=0
-        else:
-            y=row[1]['좌표정보(y)']
+            close_y=0
+            close_m=0
 
-        cur.execute("INSERT IGNORE INTO store(service,area,open,close,x,y) VALUES (%s,%s,%s,%s,%s,%s);",
-        (service,area,open,close,x,y))
+        cur.execute("INSERT IGNORE INTO store(service,area,open_y,open_m,close_y,close_m) VALUES (%s,%s,%s,%s,%s,%s);",
+        (service,area,open_y,open_m,close_y,close_m))
         conn.commit()
 
 ###csv파일 불러오기###
