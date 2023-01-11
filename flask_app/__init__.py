@@ -2,12 +2,10 @@ from flask import Flask,render_template
 import pandas as pd
 import pymysql
 import dash 
-# import dash_core_components as dcc
 from dash import dcc
-# import dash_html_components as html
 from dash import html
 from dash.dependencies import Input, Output 
-import plotly.express as px 
+import plotly.express as px
 
 ###MySQL 연동###
 conn=pymysql.connect(
@@ -58,10 +56,6 @@ def policy():
     p5=get_policy('5')
 
     return render_template('policy.html',p0=p0,p1=p1,p2=p2,p3=p3,p4=p4,p5=p5),200
-
-# @app.route('/dashboard')
-# def dashboard():
-#     return render_template('dashboard.html'),200
 
 dash_app=dash.Dash(
     __name__,
@@ -119,8 +113,7 @@ dash_app.layout=html.Div([
     dcc.Graph(figure=fig2),
     dcc.Graph(figure=fig3),
     dcc.Graph(figure=fig4),
-    dcc.Graph(figure=fig5),
-
+    dcc.Graph(figure=fig5)
 ])
 
 if __name__=='__main__':
